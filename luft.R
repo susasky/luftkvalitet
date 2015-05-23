@@ -52,7 +52,7 @@ values$NO_x<-as.numeric(values$NO_x)
 #Plotting using rChart (cool!! :) )
 m1 <- mPlot(x="stime", y=c("NO_2","NO_x", "CO"), type = "Line", data = values)
 m1$set(pointSize = 0, lineWidth = 1)
-#m1$save("chart2")
+m1$save("chart.html")
 
 
 
