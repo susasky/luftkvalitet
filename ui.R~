@@ -1,0 +1,14 @@
+## ui.R
+library(shiny)
+require(rCharts)
+shinyUI(pageWithSidebar(
+  headerPanel("rCharts: Highcharts"),
+  sidebarPanel(
+    selectInput(inputId = "x",
+      label = "Choose X",
+      choices = c('NO_2', 'NO_x', 'CO'),
+      selected = "CO")
+    ),
+  mainPanel(showOutput("myChart", "Highcharts")
+  )
+))
