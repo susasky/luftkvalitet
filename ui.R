@@ -1,23 +1,24 @@
 ## ui.R
 library(shiny)
-# devtools::install_github("rCharts", "ramnathv", ref = "dev")
 library(rCharts)
 
 # Define UI for application that plots air quality data
-               
- # Application title
- #titlePanel("Aarhus Luftkvalitet"),
- sidebarLayout(       
- # Sidebar with a select input for polluttant
- sidebarPanel(
-  checkboxGroupInput("poll",
-          "Select Polluttant to graph:",
-          c("NO2" = "NO_2","NOx" = "NO_x","CO" = "CO"))),
-  
- mainPanel(
-    h3(textOutput("caption")), 
-    verbatimTextOutput("summary"),
-    #showOutput("airplot", "morris"))
-    plotOutput("airplot")) 
- 
-  ) # closes sidebarLayout
+shinyUI(pageWithSidebar(  
+  headerPanel("Aarhus Luftkvalitet"),
+
+  sidebarPanel(
+   checkboxGroupInput("poll",
+    "Select Polluttant to graph:",
+    c("NO2" = "NO_2","NOx" = "NO_x","CO" = "CO"),
+    selected="CO"),
+   actionButton("gobutton","Update Plot")
+   #submitButton(text = "Apply Changes", icon = NULL)
+  ), #closes SidebarPanel
+   
+  mainPanel(
+   htmlOutput("caption"),
+   #tableOutput("summary"),
+   verbatimTextOutput("summary"),
+   plotOutput("airplot")
+  ) #closes mainPanel
+))

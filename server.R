@@ -1,16 +1,16 @@
 #server.R
 library(shiny)
-# devtools::install_github("rCharts", "ramnathv", ref = "dev")
 library(rCharts)
 
 # Define server logic required to generate and plot air quality data
 options(RCHART_WIDTH = 800)
 shinyServer(function(input, output) {
-        
-        output$caption <- renderText({
+
+        output$caption <- renderUI({
         #    paste(input$caption,min(no_co$stime),": ")
-             
-             paste("Air Quality Data from",min(no_co$stime)," ")
+             str1 <- paste("Collected from:",min(no_co$stime)," ")
+             str2 <- paste("to:", max(no_co$stime)," ")
+             HTML(paste("Aarhus Air Quality Data", str1, str2, sep = '<br/>'))
         })
         
         # The output$summary depends on the datasetInput reactive expression, 
@@ -25,5 +25,5 @@ shinyServer(function(input, output) {
                airplot <- mPlot(x="stime", y=input$poll, type = "Line", data = values)
                airplot$set(pointSize = 0, lineWidth = 1)
                return(airplot)
-          })
+        })
 })
